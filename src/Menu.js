@@ -1,9 +1,17 @@
 import React, {Component} from 'react';
 
-class Table extends Component {
+class Menu extends Component {
     render() {
         return (
-            <table bgcolor = "lightblue">
+			<div>
+			<ul>
+				  <li><a class="active" href="#home">Home</a></li>
+				  <li><a href="#news">Operation Lookup</a></li>
+				  <li><a href="#contact">Price Lookup</a></li>
+				  <li><a href="#about">About</a></li>
+				</ul>
+		
+            <table bgcolor = "white">
 	
                 <thead>
                     <tr>
@@ -30,8 +38,9 @@ class Table extends Component {
                     </tr>
                 </tbody>
             </table>
+			</div>
         );
     }
 }
 
-export default Table;
+export default Menu;
