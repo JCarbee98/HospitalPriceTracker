@@ -1,4 +1,5 @@
 import AboutPage from './AboutPage';
+import OperationLookup from './OperationLookup';
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
@@ -44,7 +45,7 @@ const Hospital = () => (
 
 const Price = () => (
   <div>
-    <h2>Price</h2>
+    <OperationLookup />
   </div>
 );
 
