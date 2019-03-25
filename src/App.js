@@ -1,11 +1,17 @@
 import AboutPage from './AboutPage';
 import OperationLookup from './OperationLookup';
+import HospitalLookup from './HospitalLookup';
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Helmet } from 'react-helmet';
 
 const App = () => (
   <Router>
     <div>
+	 <Helmet>
+      <title>Home Page</title>
+    </Helmet>
+	
       <ul>
         <li>
           <Link to="/">Home</Link>
@@ -39,7 +45,7 @@ const Home = () => (
 
 const Hospital = () => (
   <div>
-    <h2>Hopsital</h2>
+    <HospitalLookup />
   </div>
 );
 
