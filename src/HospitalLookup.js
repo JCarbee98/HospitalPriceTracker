@@ -5,20 +5,14 @@ import Search from 'react-search'
 import ReactDOM from 'react-dom'
 import StyledSearch from "./Components/StyledSearch";
 import styled from "styled-components";
-import Firebase, { FirebaseContext } from './Components/firebase';
-
+import firebase from 'firebase';
 const ButtonTest = styled.button`
   color: red;
 
 `
 
-
-
 class HospitalLookup extends Component {	
-	
-	
-	
-	
+
 	handleItemsChange(items) {
     console.log(items)
   }
@@ -26,6 +20,7 @@ class HospitalLookup extends Component {
   constructor (props) {
     super(props)
     this.state = {
+      testval:"hardcodedtest",
       repos: []
     }
 	
@@ -33,9 +28,11 @@ class HospitalLookup extends Component {
   }
 	
    handleClick() {
-    var x = document.getElementById("mysearch").value;
+    const rootRef=firebase.database().ref('/hospital/');
+    var x = rootRef;
     document.getElementById("demo").innerHTML = x;
   }
+
     render() {
 		
 		 let items = [
@@ -45,8 +42,6 @@ class HospitalLookup extends Component {
       { id: 3, value: 'Jackson Memorial Hospital' },
       { id: 4, value: 'Mercy Hospital' }
 ]	
-		
-		
         return (
 						
 						
@@ -58,7 +53,9 @@ class HospitalLookup extends Component {
 			<label for="mysearch">Enter the hospital name: </label> 
 			<input id="mysearch" type="search" placeholder="search"/>
 			<button onClick={this.handleClick}>Click Me</button>
-			<p id="demo"></p>
+			<p id="demo">
+      </p>
+      <h1>{this.state.testval}</h1>
 
 			{/*	
 			<p>Enter the Hospital Name:</p>

@@ -5,6 +5,7 @@ import'./index.css';
 import Firebase, { FirebaseContext } from './Components';
 
 ReactDOM.render(
+
 	<FirebaseContext.Provider value={new Firebase()}>
 <App />
 	</FirebaseContext.Provider>,
