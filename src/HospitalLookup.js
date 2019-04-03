@@ -5,7 +5,7 @@ import Search from 'react-search'
 import ReactDOM from 'react-dom'
 import StyledSearch from "./Components/StyledSearch";
 import styled from "styled-components";
-
+import Firebase, { FirebaseContext } from './Components/firebase';
 
 const ButtonTest = styled.button`
   color: red;
@@ -14,8 +14,10 @@ const ButtonTest = styled.button`
 
 
 
-
 class HospitalLookup extends Component {	
+	
+	
+	
 	
 	handleItemsChange(items) {
     console.log(items)
