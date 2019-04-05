@@ -27,12 +27,9 @@ class HospitalLookup extends Component {
 
   handleClick() {
     const rootRef = firebase.database().ref("/Hospitals/");
-    console.log(rootRef);
     var usrHospital = document.getElementById("usrHospital").value;
-    console.log(usrHospital);
     var x = rootRef.child(usrHospital).child("Address").on('value',
     snapshot=>{
-      console.log(snapshot.val());
       document.getElementById("demo").value=snapshot.val();
       this.setState({testval:snapshot.val()});
     });
@@ -74,3 +71,21 @@ class HospitalLookup extends Component {
 }
 
 export default HospitalLookup;
+/*
+firebase example
+const rootref=firebase.database().ref() //this is the basic connection, connects to firebase realtime database root
+//to reference the 'Test' variable 
+rootRef.child('Test').on('value',snapshot=>{//on is a one-time query to the DB
+  //value of Test is held with snapshot.val() here so you can do
+  console.log(snapshot.val());
+};
+  //and itll print to your browser console
+  to look at the address of TMHC
+  Hospitals
+  └Tallahassee Memorial HealthCare
+    └Address="1300...."
+rootRef.child('Hospitals').child('Tallahassee Memorial HealthCare').child('Address').on('value',snapshot=>{
+console.log(snapshot.val());
+});
+})
+*/ 
