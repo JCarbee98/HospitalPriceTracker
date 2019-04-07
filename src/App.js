@@ -3,6 +3,57 @@ import AboutPage from './AboutPage';
 import OperationLookup from './OperationLookup';
 import HospitalLookup from './HospitalLookup';
 import React from "react";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { Helmet } from 'react-helmet';
+import { Layout } from './Components/Layout';
+import { NavigationBar }from './Components/CustomNavbar';
+
+
+class App extends React.Component {
+  render() {
+    return (
+      <React.Fragment>
+        <NavigationBar />
+          <Layout>
+          <Router>
+            <Switch>
+             <Route exact path="/" component={HomePage} />
+	           <Route path="/hospitallookup" component={HospitalLookup} />
+	           <Route path="/operationlookup" component={OperationLookup} />
+             <Route path="/about" component={AboutPage} />
+            </Switch>
+        </Router>
+       </Layout>
+      </React.Fragment>
+    )
+  }
+}
+
+
+export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*import HomePage from './HomePage';
+import AboutPage from './AboutPage';
+import OperationLookup from './OperationLookup';
+import HospitalLookup from './HospitalLookup';
+import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { Helmet } from 'react-helmet';
 
@@ -62,68 +113,5 @@ const About = () => (
     <AboutPage />
   </div>
 );
-
-
-
-
-
-
-
-
-
-/*import HomePage from './HomePage';
-import AboutPage from './AboutPage';
-import OperationLookup from './OperationLookup';
-import HospitalLookup from './HospitalLookup';
-import React from "react";
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import { Helmet } from 'react-helmet';
-import { Layout } from './Components/Layout';
-import { NavigationBar }from './Components/CustomNavbar';
-
-
-class App extends React.Component {
-  render() {
-    return (
-      <React.Fragment>
-        <NavigationBar />
-          <Layout>
-          <Router>
-            <Switch>
-             <Route exact path="/" component={HomePage} />
-	           <Route path="/hospitallookup" component={HospitalLookup} />
-	           <Route path="/operationlookup" component={OperationLookup} />
-             <Route path="/about" component={AboutPage} />
-            </Switch>
-        </Router>
-       </Layout>
-      </React.Fragment>
-    )
-  }
-}
 */
-
-export default App;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-*/
-
 
