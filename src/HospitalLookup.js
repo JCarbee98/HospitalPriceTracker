@@ -26,7 +26,7 @@ class HospitalLookup extends Component {
   }
 
   handleClick() {
-    const rootRef = firebase.database().ref("/Hospitals/");
+    const rootRef = firebase.database().ref("/9099/");
     var usrHospital = document.getElementById("usrHospital").value;
     var x = rootRef.child(usrHospital).child("Address").on('value',
     snapshot=>{

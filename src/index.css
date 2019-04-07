@@ -184,7 +184,7 @@ html {
 
 body {
   color: #404040;
-  background: url(background.png);
+  background: url(background2.png);
   font-size: 1rem; }
 
 p,
@@ -672,7 +672,10 @@ ul {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: black;
+  border: 2px solid;
+  background-color: #d0d9dc;
+  
+
 }
 
 li {
@@ -681,10 +684,14 @@ li {
 
 li a {
   display: block;
-  color: white;
+  color: black;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
+  font-family: 'Corben', Georgia, Times, serif;
+  text-shadow: 1px 1px 1px #ccc;
+  
+  
 }
 
 li a:hover {
@@ -692,11 +699,13 @@ li a:hover {
 }
   
 h2 {
-	color: white;
+	color: black;
+	
+	
 }
 
 p {
-	color: white;
+	color: black;
 }
 
 label {

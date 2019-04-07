@@ -1,3 +1,4 @@
+import HomePage from './HomePage';
 import AboutPage from './AboutPage';
 import OperationLookup from './OperationLookup';
 import HospitalLookup from './HospitalLookup';
@@ -9,7 +10,8 @@ const App = () => (
   <Router>
     <div>
 	 <Helmet>
-      <title>Home Page</title>
+	   <HomePage />
+    //  <title>Home Page</title>
     </Helmet>
 	
       <ul>
@@ -27,7 +29,7 @@ const App = () => (
         </li>
       </ul>
 
-      <hr />
+      
 
       <Route exact path="/" component={Home} />
 	  <Route path="/hospital" component={Hospital} />
@@ -39,7 +41,7 @@ const App = () => (
 
 const Home = () => (
   <div>
-    <h2>Home</h2>
+    <HomePage />
   </div>
 );
 
