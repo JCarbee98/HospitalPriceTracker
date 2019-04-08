@@ -35,7 +35,30 @@ class HospitalLookup extends Component {
   handleClick() {
 	var table = document.getElementById("myTable");
 	var i;
-	for(i = 0; i < 216; i++)
+	
+	const rootCheck = firebase.database().ref();
+	var isReal = (document.getElementById("usrHospital").value).toUpperCase();
+
+	var z = rootCheck.child(isReal).child('0').child("DRG Definition").on('value',
+		snapshot=>{ //always has a 0 operation so we can check to see if it exists
+        this.setState({testval:snapshot.val()});
+		
+		if(snapshot.val() == null)
+		{
+			let newRow = table.insertRow(-1);
+			let newCell = newRow.insertCell(0);
+			let newText = document.createTextNode(isReal + " does not exist");
+			newCell.appendChild(newText);
+		}
+		else
+		{
+			//INSERT HOSPITAL INFORMATION INTO TABLE
+		}
+		
+		});
+	
+	
+	for(i = 0; i < 216; i++) //Just went by the highest number I could find in the database
 	{
 		
 		let newRow = table.insertRow(-1);
