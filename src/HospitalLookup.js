@@ -6,8 +6,15 @@ import ReactDOM from "react-dom";
 import StyledSearch from "./Components/StyledSearch";
 import styled from "styled-components";
 import firebase from "firebase";
+
 const ButtonTest = styled.button`
-  color: red;
+  color: black;
+  background-color : white;
+  
+  :hover {
+	  color: black;
+	  background-color : lightgrey;
+  }
 `;
 
 class HospitalLookup extends Component {
@@ -28,37 +35,38 @@ class HospitalLookup extends Component {
   handleClick() {
 	var table = document.getElementById("myTable");
 	var i;
-	for(i = 0; i < 100; i++)
+	for(i = 0; i < 216; i++)
 	{
 		
 		let newRow = table.insertRow(-1);
 		const rootRef = firebase.database().ref();
-		
+		var usrHospital = (document.getElementById("usrHospital").value).toUpperCase();
 		//Used to get operation names
-		var usrHospital = document.getElementById("usrHospital").value;
 		var x = rootRef.child(usrHospital).child(i.toString()).child("DRG Definition").on('value',
 		snapshot=>{
-        document.getElementById("demo").value=snapshot.val();
         this.setState({testval:snapshot.val()});
         
 		//Adds to table
-		let newCell = newRow.insertCell(0);
-		let newText = document.createTextNode(snapshot.val());
-		newCell.appendChild(newText);
-
+		if(snapshot.val() != null)
+		{
+			let newCell = newRow.insertCell(0);
+			let newText = document.createTextNode(snapshot.val());
+			newCell.appendChild(newText);
+		}
 		});
     
 		//Used to get operation prices
 		var y = rootRef.child(usrHospital).child(i.toString()).child("Average Total Payments").on('value',
 		snapshot=>{
-        document.getElementById("demo").value=snapshot.val();
         this.setState({testval:snapshot.val()});
         
 		//Adds to table
-		let newCell2 = newRow.insertCell(1);
-		let newText2 = document.createTextNode('$'+snapshot.val());
-		newCell2.appendChild(newText2);
-		
+		if(snapshot.val() != null)
+		{
+			let newCell2 = newRow.insertCell(1);
+			let newText2 = document.createTextNode('$'+snapshot.val());
+			newCell2.appendChild(newText2);
+		}
 		
 		});
 		
@@ -86,24 +94,12 @@ class HospitalLookup extends Component {
 
         <label for="mysearch">Enter the hospital name: </label>
         <input id="usrHospital" type="search" placeholder="search" />
-        <button onClick={this.handleClick}>Click Me</button>
-        <p id="demo" />
+        <ButtonTest onClick={this.handleClick}>Click Me</ButtonTest>
 		
 		<table id="myTable">
 			
 		</table>
-		
-        <h1>{this.state.testval}</h1>
 
-        {/*	
-			<p>Enter the Hospital Name:</p>
-			<StyledSearch items={items}
-                maxSelected={3}
-                multiple={true}
-                onItemsChanged={this.handleItemsChange.bind(this)} />
-			<ButtonTest>Hello Button!</ButtonTest>	
-			
-			*/}
       </div>
     );
   }
