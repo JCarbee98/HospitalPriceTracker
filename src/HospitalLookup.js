@@ -26,13 +26,33 @@ class HospitalLookup extends Component {
   }
 
   handleClick() {
-    const rootRef = firebase.database().ref("/9099/");
-    var usrHospital = document.getElementById("usrHospital").value;
-    var x = rootRef.child(usrHospital).child("Address").on('value',
-    snapshot=>{
-      document.getElementById("demo").value=snapshot.val();
-      this.setState({testval:snapshot.val()});
-    });
+	var table = document.getElementById("myTable");
+	var i;
+	for(i = 0; i < 100; i++)
+	{
+		const rootRef = firebase.database().ref();
+		var usrHospital = document.getElementById("usrHospital").value;
+		var x = rootRef.child(usrHospital).child(i.toString()).child("DRG Definition").on('value',
+		snapshot=>{
+        document.getElementById("demo").value=snapshot.val();
+        this.setState({testval:snapshot.val()});
+        
+		
+		let newRow = table.insertRow(-1);
+		let newCell = newRow.insertCell(0);
+		let newText = document.createTextNode(snapshot.val());
+		newCell.appendChild(newText);
+		
+		
+		});
+    
+		
+		
+		
+		
+		
+		console.log("Hello!");	
+	}
     
   }
 
@@ -54,6 +74,11 @@ class HospitalLookup extends Component {
         <input id="usrHospital" type="search" placeholder="search" />
         <button onClick={this.handleClick}>Click Me</button>
         <p id="demo" />
+		
+		<table id="myTable">
+			
+		</table>
+		
         <h1>{this.state.testval}</h1>
 
         {/*	
