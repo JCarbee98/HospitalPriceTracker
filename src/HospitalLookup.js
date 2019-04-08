@@ -30,23 +30,37 @@ class HospitalLookup extends Component {
 	var i;
 	for(i = 0; i < 100; i++)
 	{
+		
+		let newRow = table.insertRow(-1);
 		const rootRef = firebase.database().ref();
+		
+		//Used to get operation names
 		var usrHospital = document.getElementById("usrHospital").value;
 		var x = rootRef.child(usrHospital).child(i.toString()).child("DRG Definition").on('value',
 		snapshot=>{
         document.getElementById("demo").value=snapshot.val();
         this.setState({testval:snapshot.val()});
         
-		
-		let newRow = table.insertRow(-1);
+		//Adds to table
 		let newCell = newRow.insertCell(0);
 		let newText = document.createTextNode(snapshot.val());
 		newCell.appendChild(newText);
+
+		});
+    
+		//Used to get operation prices
+		var y = rootRef.child(usrHospital).child(i.toString()).child("Average Total Payments").on('value',
+		snapshot=>{
+        document.getElementById("demo").value=snapshot.val();
+        this.setState({testval:snapshot.val()});
+        
+		//Adds to table
+		let newCell2 = newRow.insertCell(1);
+		let newText2 = document.createTextNode('$'+snapshot.val());
+		newCell2.appendChild(newText2);
 		
 		
 		});
-    
-		
 		
 		
 		
