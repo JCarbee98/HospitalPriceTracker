@@ -2,21 +2,27 @@ import React, { Component } from "react";
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-
+//Avenir font  15px
 const Styles = styled.div`
     .navbar {
         background-color: #222
+        
     }
-
+ 
+    }
     .navbar-brand, .navbar-nav .nav-link{
         color: #bbb;
         
         &:hover{
-            color: blue;
+            color: white;
         }
     }
 
+
+    
 `
+
+
 export const NavigationBar = () => ( 
     <Styles>
         <Navbar expand="lg">

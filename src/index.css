@@ -37,6 +37,8 @@ html {
 body {
   margin: 0; }
 
+  
+
 /* HTML5 display definitions
    ========================================================================== */
 /**
@@ -184,7 +186,7 @@ html {
 
 body {
   color: #404040;
-  background: url(background2.png);
+  background: url(./assets/background2.png);
   font-size: 1rem; }
 
 p,
