@@ -1,9 +1,13 @@
-CHIRON PRICE TRACKER\n
-CEN4020 Software Engineering Project - Group 2:\n
-  \tJoshua Carbee, Emilio Murillo, Tyler St Preux, Brandon Hahn, Spencer Lewis
+CHIRON PRICE TRACKER
 
-This is a web application being designed and developed to search and compare prices for different procedures and operations at different hospitals.\n
+CEN4020 Software Engineering Project - Group 2:
+
+  Joshua Carbee, Emilio Murillo, Tyler St Preux, Brandon Hahn, Spencer Lewis
+
+This is a web application being designed and developed to search and compare prices for different procedures and operations at different hospitals.
+
 Full information and background is available on the app under the 'About' tab.
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
