@@ -1,13 +1,23 @@
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { Helmet } from 'react-helmet';
+// Uses YouTube to embed video. Make sure to have react-youtube installed to run app.
 import YouTube from 'react-youtube';
-import image from './image.png'; // Import image
+// Import images to use
+import image from './image.png';
 import image2 from  './image2.png';
 import OperationLookup from "./OperationLookup";
 
-console.log(image); // /logo.84287d09.png
+console.log(image);
 console.log(image2);
+
+/*
+The about page details information about:
+- The project and what it does
+- How and why the project was started
+- Who is working on the project
+- Pitch video
+ */
 
 class AboutPage extends Component {
     render() {
@@ -69,6 +79,7 @@ class AboutPage extends Component {
     }
 }
 
+// Pitch video is included at the bottom using react-youtube
 class Pitch extends React.Component {
 	render() {
 		const opts = {

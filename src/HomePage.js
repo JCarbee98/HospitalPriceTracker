@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
+// Style setting to center header
 var divStyle = {
     width: "500px",
     margin: "auto"
 };
 
+// Basic information about the project in it's current iteration is listed on the homepage
 class HomePage extends Component {
     render() {
         return (
