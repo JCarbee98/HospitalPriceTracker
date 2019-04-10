@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { Helmet } from 'react-helmet';
+import YouTube from 'react-youtube';
 import image from './image.png'; // Import image
 import image2 from  './image2.png';
+import OperationLookup from "./OperationLookup";
 
 console.log(image); // /logo.84287d09.png
 console.log(image2);
@@ -26,7 +28,7 @@ class AboutPage extends Component {
 				</div>
 				<div>
 					<p>Our idea was birthed from a new law that was passed on January 1, 2019. Emilio Murillo informed the rest
-					of us about it, and how it now requires all hospitals that take medicare/medicaid to publish complete price lists online.
+					of us about the Inpatient Prospective Payment System Rule, and how it now requires all hospitals that take medicare/medicaid to publish complete price lists online.
 					This law, however, does not specify a format for the data; and prices for some hospitals can also be difficult to
 					find. So, the goal of Chiron Price Tracker is to provide an easy to use comparison search tool for multiple
 						different hospitals.</p>
@@ -54,11 +56,42 @@ class AboutPage extends Component {
 					<img src={image2} alt="Image2" />
 				</div>
 					And who could forget the amazing Joshua Carbee!?
+				<div>
+					<p></p>
+					<div>
+						<p>If you would like to learn more about our goals and future of our project please watch the pitch video below:</p>
+					</div>
+					<Pitch />
+				</div>
 			</div>
 
         );
     }
 }
 
+class Pitch extends React.Component {
+	render() {
+		const opts = {
+			height: '390',
+			width: '640',
+			playerVars: {
+				autoplay: 0
+			}
+		};
+
+		return (
+			<YouTube
+				videoId="NZvwDS8RcI8"
+				opts={opts}
+				onReady={this._onReady}
+			/>
+		);
+	}
+
+	_onReady(event) {
+		// access to player in all event handlers via event.target
+		event.target.pauseVideo();
+	}
+}
 
 export default AboutPage;
