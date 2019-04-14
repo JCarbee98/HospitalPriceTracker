@@ -35,43 +35,7 @@ class HospitalLookup extends Component {
   visibleElement() {
   document.getElementById("dropBar").style.visibility = "hidden";
 }
-  
-  sortTable() {
-  var table, rows, switching, i, x, y, shouldSwitch;
-  var x;
-  var y;
-  table = document.getElementById("myTable");
-  switching = true;
-  /*Make a loop that will continue until
-  no switching has been done:*/
-  while (switching) {
-    //start by saying: no switching is done:
-    switching = false;
-    rows = table.rows;
-    /*Loop through all table rows (except the
-    first, which contains table headers):*/
-    for (i = 1; i < (rows.length - 1); i++) {
-      //start by saying there should be no switching:
-      shouldSwitch = false;
-      /*Get the two elements you want to compare,
-      one from current row and one from the next:*/
-      //check if the two rows should switch place:
-	  console.log("hiya "+document.getElementById("myTable").rows.length);
-      if ((document.getElementById("myTable").rows[i].cells[1].innerHTML).toLowerCase()> (document.getElementById("myTable").rows[i+1].cells[1].innerHTML).toLowerCase() ){	
-        //if so, mark as a switch and break the loop:
-        shouldSwitch = true;
-        break;
-      }
-    }
-    if (shouldSwitch) {
-      /*If a switch has been marked, make the switch
-      and mark that a switch has been done:*/
-      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-      switching = true;
-    }
-  }
-  }
-  
+   
   
   handleClick() {
 	var table = document.getElementById("myTable");
@@ -152,13 +116,7 @@ class HospitalLookup extends Component {
 	
   
   render() {
-    let items = [
-      { id: 0, value: "Capital Regional Medical Center" },
-      { id: 1, value: "Tallahassee Memorial HealthCare" },
-      { id: 2, value: "University of Miami Hospital" },
-      { id: 3, value: "Jackson Memorial Hospital" },
-      { id: 4, value: "Mercy Hospital" }
-    ];
+ 
     return (
 		
       <div class="search-container">
