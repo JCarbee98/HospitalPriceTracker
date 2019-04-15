@@ -40,7 +40,8 @@ class OperationLookup extends Component {
   
   handleClick() {
 	var table = document.getElementById("myTable");
-	var i;
+	var usrOperation = (document.getElementById("usrOperation").value).toUpperCase();
+	
 	
 	var testing = firebase.database().ref().on('value', function(snap) { //Loops through the hospital names
 	
@@ -51,6 +52,22 @@ class OperationLookup extends Component {
 				snap2.forEach(function(child2Nodes) { //loops through the numbers of each hospital
 					console.log("inner");
 						
+						var innerVal =child2Nodes.child("DRG Definition").val();
+						
+						if(innerVal == usrOperation)
+						{
+								console.log("match!");
+								
+								let newRow = table.insertRow(-1);
+								let newCell = newRow.insertCell(0);
+								let newText = document.createTextNode(childNodes.key);
+								newCell.appendChild(newText);
+								let newCell2 = newRow.insertCell(1);
+								let newText2 = document.createTextNode('$'+child2Nodes.child("Average Total Payments").val());
+								newCell2.appendChild(newText2);
+								
+						}
+						//872 - SEPTICEMIA OR SEVERE SEPSIS W/O MV >96 HOURS W/O MCC
 						//check the name of each child2Nodes.val().name to see if it matches the user input
 						
 				});
@@ -58,7 +75,7 @@ class OperationLookup extends Component {
 		
 			
 			
-			console.log("outer");
+			//console.log("outer");
 		});
 	});
 		
@@ -77,7 +94,7 @@ class OperationLookup extends Component {
 			</Helmet>
 
 			<label for="mysearch">Enter the operation name: </label>
-			<input id="usrHospital" type="search" placeholder="search" />
+			<input id="usrOperation" type="search" placeholder="search" />
 			<ButtonTest onClick={this.handleClick}>Click Me</ButtonTest>
 			<div align="right">
 			<select id="dropBar" >
