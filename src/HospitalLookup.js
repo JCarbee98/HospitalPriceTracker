@@ -68,47 +68,20 @@ class HospitalLookup extends Component {
 		});
 	
 	
-	for(i = 0; i < 216; i++) //Just went by the highest number I could find in the database
-	{
-		
-		let newRow;
 		const rootRef = firebase.database().ref();
 		var usrHospital = (document.getElementById("usrHospital").value).toUpperCase();
-		//Used to get operation names
-		var x = rootRef.child(usrHospital).child(i.toString()).child("DRG Definition").on('value',
-		snapshot=>{
-        this.setState({testval:snapshot.val()});
-        
-		//Adds to table
-		if(snapshot.val() != null)
-		{
-			newRow = table.insertRow(-1);
-			let newCell = newRow.insertCell(0);
-			let newText = document.createTextNode(snapshot.val());
-			newCell.appendChild(newText);
-		}
-		});
-    
-		//Used to get operation prices
-		var y = rootRef.child(usrHospital).child(i.toString()).child("Average Total Payments").on('value',
-		snapshot=>{
-        this.setState({testval:snapshot.val()});
-        
-		//Adds to table
-		if(snapshot.val() != null)
-		{
-			let newCell2 = newRow.insertCell(1);
-			let newText2 = document.createTextNode('$'+snapshot.val());
-			newCell2.appendChild(newText2);
-		}
-		
-		});
-		
-		
-		
-		//this.sortTable();
-		console.log("Hello!");	
-	}
+		 rootRef.child(usrHospital).once("value").then(function(snapshot){
+			snapshot.forEach(function(childSnap){
+				console.log(childSnap.val());
+				let newRow = table.insertRow(-1);
+				let newCell = newRow.insertCell(0);
+				let newText = document.createTextNode(childSnap.child("DRG Definition").val());
+				newCell.appendChild(newText);
+				let newCell2 = newRow.insertCell(1);
+				let newText2 = document.createTextNode('$'+childSnap.child("Average Total Payments").val());
+				newCell2.appendChild(newText2);
+				})
+			});
     
 
 	
