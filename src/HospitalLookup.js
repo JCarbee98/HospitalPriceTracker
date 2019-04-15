@@ -39,7 +39,13 @@ class HospitalLookup extends Component {
   
   handleClick() {
 	var table = document.getElementById("myTable");
-	var i;
+	
+	if (table.rows.length > 0)	{ //clears out table if not empty
+		while(table.rows.length != 0)	{
+			table.deleteRow(0);
+		}
+	}
+	
 	
 	const rootCheck = firebase.database().ref();
 	var isReal = (document.getElementById("usrHospital").value).toUpperCase();

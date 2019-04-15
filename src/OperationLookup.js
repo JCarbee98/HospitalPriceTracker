@@ -40,6 +40,11 @@ class OperationLookup extends Component {
   
   handleClick() {
 	var table = document.getElementById("myTable");
+	if (table.rows.length > 0) { //clears out table if not empty
+		while(table.rows.length != 0)	{
+			table.deleteRow(0);
+		}
+	}
 	var usrOperation = (document.getElementById("usrOperation").value).toUpperCase();
 	
 	
@@ -50,21 +55,28 @@ class OperationLookup extends Component {
 			firebase.database().ref().child(childNodes.key).on('value', function(snap2) {
 				
 				snap2.forEach(function(child2Nodes) { //loops through the numbers of each hospital
-					console.log("inner");
+				//	console.log("inner");
 						
 						var innerVal =child2Nodes.child("DRG Definition").val();
 						
-						if(innerVal == usrOperation)
+						if(innerVal.includes(usrOperation) == true)
 						{
-								console.log("match!");
+								//console.log("match!");
+								
 								
 								let newRow = table.insertRow(-1);
 								let newCell = newRow.insertCell(0);
 								let newText = document.createTextNode(childNodes.key);
 								newCell.appendChild(newText);
-								let newCell2 = newRow.insertCell(1);
-								let newText2 = document.createTextNode('$'+child2Nodes.child("Average Total Payments").val());
-								newCell2.appendChild(newText2);
+								
+								let nameCell = newRow.insertCell(1);
+								let nameText = document.createTextNode(child2Nodes.child("DRG Definition").val());
+								nameCell.appendChild(nameText);
+								
+								
+								let priceCell = newRow.insertCell(2);
+								let priceText = document.createTextNode('$'+child2Nodes.child("Average Total Payments").val());
+								priceCell.appendChild(priceText);
 								
 						}
 						//872 - SEPTICEMIA OR SEVERE SEPSIS W/O MV >96 HOURS W/O MCC
