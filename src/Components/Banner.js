@@ -1,13 +1,14 @@
 import React from "react";
 import { Jumbotron as Jumbo, Container } from 'react-bootstrap';
 import styled from 'styled-components';
-import BanImageC from '../assets/BanImageC.jpg';
+import BanImage from '../assets/BanImage.jpg';
+
 const Styles = styled.div`
     .jumbo{
-        background: url(${BanImageC}) no-repeat fixed bottom;
+        background: url(${BanImage}) no-repeat fixed bottom;
         background-size: cover;
-        color:  #ccc;
-        height: 200px;
+        color:  #efefef;
+        height: 300px;
         position: relative;
         z-index: -2;
     }
@@ -26,15 +27,18 @@ const Styles = styled.div`
 `;
 
 
+
+
 export const Banner = () => (
     <Styles>
         <Jumbo fluid className="jumbo">
-            <div className="overlay">
+            <div className="overlay"></div>
             <Container>
-                <h1>Chiron Price Tracker</h1>
-                <p></p>
+                <h1 style = {{color: 'white'}}> Chiron Price Tracker</h1>
+              
             </Container>
-            </div>
         </Jumbo> 
     </Styles>
 )
+
+//<p style = {{color: 'white'}}>This application is currently in development.</p>
