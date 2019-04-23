@@ -36,7 +36,7 @@ class OperationLookup extends Component {
   visibleElement() {
   document.getElementById("dropBar").style.visibility = "hidden";
 }
-  
+
   
   handleClick() {
 	var table = document.getElementById("myTable");
@@ -47,7 +47,8 @@ class OperationLookup extends Component {
 	}
 	var usrOperation = (document.getElementById("usrOperation").value).toUpperCase();
 	
-	
+	var operationTotal=0;
+	var numOperations=0;
 	var testing = firebase.database().ref().on('value', function(snap) { //Loops through the hospital names
 	
 		snap.forEach(function(childNodes) { 
@@ -61,9 +62,6 @@ class OperationLookup extends Component {
 						
 						if(innerVal.includes(usrOperation) == true)
 						{
-								//console.log("match!");
-								
-								
 								let newRow = table.insertRow(-1);
 								let newCell = newRow.insertCell(0);
 								let newText = document.createTextNode(childNodes.key);
@@ -77,26 +75,54 @@ class OperationLookup extends Component {
 								let priceCell = newRow.insertCell(2);
 								let priceText = document.createTextNode('$'+child2Nodes.child("Average Total Payments").val());
 								priceCell.appendChild(priceText);
-								
+
+								numOperations++;
+								operationTotal+=parseFloat(child2Nodes.child("Average Total Payments").val(),10);
 						}
 						//872 - SEPTICEMIA OR SEVERE SEPSIS W/O MV >96 HOURS W/O MCC
 						//check the name of each child2Nodes.val().name to see if it matches the user input
 						
 				});
+				
 			});
 		
 			
-			
+		
 			//console.log("outer");
 		});
+		//console.log(operationTotal);
+		//console.log(numOperations);
+		//console.log(operationTotal/numOperations);
 	});
-		
-		
+		//calculate average price for operations returned
+		//THIS NEEDS TO BE MADE INTO A FUNCTION CALLED AFTER DATABASE RETURNS VALS
+		var operationAverage=operationTotal/numOperations;
+		//regex pattern to make operation prices legibile to parseFloat
+		var pattern = /[^0-9.-]+/g;
+		for(var i=0; i<numOperations;++i){
+			//attempt to iterate through table, add a % difference column, need get operation price from table
+			var temprow=table.rows[i];
+			var avgcell=temprow.insertCell(3);
+			var average=((parseFloat(temprow.cells[2].innerHTML.replace(pattern,''))/operationAverage));
+			var priceComparison;
+			if(average<1){
+				var outAvg=Math.round((1-average)*100);
+				outAvg=Math.trunc(outAvg);
+				 priceComparison=document.createTextNode("% "+outAvg+" lower");
+			}
+			else{
+				var outAvg=Math.round((average-1)*100);
+				outAvg=Math.trunc(outAvg);
+				 priceComparison=document.createTextNode("% "+outAvg+" higher");
+			}
+			avgcell.appendChild(priceComparison);
+		}
+		//END OF FUNCTION
     
   
   }
   
-  
+
 
    render() {
         return (
