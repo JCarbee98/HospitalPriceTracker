@@ -9,6 +9,8 @@ import { Layout } from './Components/Layout';
 import { NavigationBar }from './Components/CustomNavbar';
 import { Banner } from './Components/Banner';
 
+
+
 class App extends React.Component {
   render() {
     return (

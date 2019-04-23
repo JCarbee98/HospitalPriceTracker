@@ -6,8 +6,15 @@ import ReactDOM from "react-dom";
 import StyledSearch from "./Components/StyledSearch";
 import styled from "styled-components";
 import firebase from "firebase";
+
 const ButtonTest = styled.button`
-  color: red;
+  color: black;
+  background-color : white;
+  
+  :hover {
+	  color: black;
+	  background-color : lightgrey;
+  }
 `;
 
 class HospitalLookup extends Component {
@@ -21,30 +28,76 @@ class HospitalLookup extends Component {
       testval: "hardcodedtest",
       repos: []
     };
-
+	
     this.handleClick = this.handleClick.bind(this);
   }
-
+  
+  visibleElement() {
+  document.getElementById("dropBar").style.visibility = "hidden";
+}
+   
+  
   handleClick() {
-    const rootRef = firebase.database().ref("/9099/");
-    var usrHospital = document.getElementById("usrHospital").value;
-    var x = rootRef.child(usrHospital).child("Address").on('value',
-    snapshot=>{
-      document.getElementById("demo").value=snapshot.val();
-      this.setState({testval:snapshot.val()});
-    });
-    
-  }
+	var table = document.getElementById("myTable");
+	
+	if (table.rows.length > 0)	{ //clears out table if not empty
+		while(table.rows.length != 0)	{
+			table.deleteRow(0);
+		}
+	}
+	
+	
+	const rootCheck = firebase.database().ref();
+	var isReal = (document.getElementById("usrHospital").value).toUpperCase();
 
+	var z = rootCheck.child(isReal).child('0').child("DRG Definition").on('value',
+		snapshot=>{ //always has a 0 operation so we can check to see if it exists
+        this.setState({testval:snapshot.val()});
+		
+		if(snapshot.val() == null)
+		{
+			let newRow = table.insertRow(-1);
+			let newCell = newRow.insertCell(0);
+			let newText = document.createTextNode(isReal + " does not exist");
+			newCell.appendChild(newText);
+		}
+		else
+		{
+			/* Hospital details here
+			let newRow = table.insertRow(-1);
+			let newCell = newRow.insertCell(0);
+			let newText = document.createTextNode(isReal + "");
+			newCell.appendChild(newText);
+			*/
+		}
+		
+		});
+	
+	
+		const rootRef = firebase.database().ref();
+		var usrHospital = (document.getElementById("usrHospital").value).toUpperCase();
+		 rootRef.child(usrHospital).once("value").then(function(snapshot){
+			snapshot.forEach(function(childSnap){
+				console.log(childSnap.val());
+				let newRow = table.insertRow(-1);
+				let newCell = newRow.insertCell(0);
+				let newText = document.createTextNode(childSnap.child("DRG Definition").val());
+				newCell.appendChild(newText);
+				let newCell2 = newRow.insertCell(1);
+				let newText2 = document.createTextNode('$'+childSnap.child("Average Total Payments").val());
+				newCell2.appendChild(newText2);
+				})
+			});
+    
+
+	
+  }
+	
+  
   render() {
-    let items = [
-      { id: 0, value: "Capital Regional Medical Center" },
-      { id: 1, value: "Tallahassee Memorial HealthCare" },
-      { id: 2, value: "University of Miami Hospital" },
-      { id: 3, value: "Jackson Memorial Hospital" },
-      { id: 4, value: "Mercy Hospital" }
-    ];
+ 
     return (
+		
       <div class="search-container">
         <Helmet>
           <title>Hospital Lookup</title>
@@ -52,19 +105,17 @@ class HospitalLookup extends Component {
 
         <label for="mysearch">Enter the hospital name: </label>
         <input id="usrHospital" type="search" placeholder="search" />
-        <button onClick={this.handleClick}>Click Me</button>
-        <p id="demo" />
-        <h1>{this.state.testval}</h1>
-
-        {/*	
-			<p>Enter the Hospital Name:</p>
-			<StyledSearch items={items}
-                maxSelected={3}
-                multiple={true}
-                onItemsChanged={this.handleItemsChange.bind(this)} />
-			<ButtonTest>Hello Button!</ButtonTest>	
+        <ButtonTest onClick={this.handleClick}>Click Me</ButtonTest>
+		<div align="right">
+		<select id="dropBar" >
+		<option value="name">Order by name</option>
+		<option value="price">Order by price</option>		
+		</select>
+		</div>
+		<table id="myTable">
 			
-			*/}
+		</table>
+	
       </div>
     );
   }

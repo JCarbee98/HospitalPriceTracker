@@ -549,7 +549,7 @@ a.full-button {
 
 /* Forms
   =============== */
-[type=color], [type=date], [type=datetime], [type=datetime-local], [type=email], [type=month], [type=number], [type=password], [type=search], [type=tel], [type=text], [type=url], [type=week], [type=time], select, textarea {
+[type=color], [type=date], [type=datetime], [type=datetime-local], [type=email], [type=month], [type=number], [type=password], [type=search], [type=tel], [type=text], [type=url], [type=week], [type=time], textarea {
   display: block;
   border: 1px solid #cdcdcd;
   border-radius: 4px;
@@ -712,5 +712,22 @@ p {
 
 label {
 	color: white;
+}
+
+select {
+	
+  display: block;
+  border: 1px solid #cdcdcd;
+  border-radius: 4px;
+  padding: .75rem;
+  outline: none;
+  background: transparent;
+  margin-bottom: .5rem;
+  font-size: 1rem;
+  width: 10%;
+  max-width: 100%;
+  line-height: 1;
+  color : black;
+  
 }
 
