@@ -186,7 +186,7 @@ html {
 
 body {
   color: #404040;
-  
+  background: url(background2.png);
   font-size: 1rem; }
 /* background: url(./assets/background2.png);*/
 p,
