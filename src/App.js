@@ -2,6 +2,7 @@ import HomePage from './HomePage';
 import AboutPage from './AboutPage';
 import OperationLookup from './OperationLookup';
 import HospitalLookup from './HospitalLookup';
+import SupportedHospitals from './SupportedHospitals';
 import React from "react";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { Helmet } from 'react-helmet';
@@ -23,6 +24,7 @@ class App extends React.Component {
              <Route exact path="/" component={HomePage} />
 	           <Route path="/hospitallookup" component={HospitalLookup} />
 	           <Route path="/operationlookup" component={OperationLookup} />
+			   <Route path="/supportedhospitals" component={SupportedHospitals} />
              <Route path="/about" component={AboutPage} />
             </Switch>
         </Router>

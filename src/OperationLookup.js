@@ -29,15 +29,45 @@ class OperationLookup extends Component {
       testval: "hardcodedtest",
       repos: []
     };
-	
-    this.handleClick = this.handleClick.bind(this);
+		this.OperationAverageFunction=this.OperationAverageFunction.bind(this);
+		this.handleClick = this.handleClick.bind(this);
+		this.test=this.test.bind(this);
   }
   
   visibleElement() {
   document.getElementById("dropBar").style.visibility = "hidden";
 }
-
-  
+test(){
+	console.log("test success");
+}
+	OperationAverageFunction(operationTotal,numOperations,table){
+		if(operationTotal==null || numOperations==null||table==null){console.log("null passed");}
+	//calculate average price for operations returned
+		//THIS NEEDS TO BE MADE INTO A FUNCTION CALLED AFTER DATABASE RETURNS VALS
+		var operationAverage=operationTotal/numOperations;
+		//regex pattern to make operation prices legibile to parseFloat
+		var pattern = /[^0-9.-]+/g;
+		for(var i=0; i<numOperations;++i){
+			//attempt to iterate through table, add a % difference column, need get operation price from table
+			var temprow=table.rows[i];
+			var avgcell=temprow.insertCell(3);
+			var average=((parseFloat(temprow.cells[2].innerHTML.replace(pattern,''))/operationAverage));
+			var priceComparison;
+			debugger;
+			var outAvg=0;
+			if(average<1){
+				outAvg =Math.round((1-average)*100);
+				outAvg=Math.trunc(outAvg);
+				 priceComparison=document.createTextNode(outAvg+"% lower");
+			}
+			else{
+				 outAvg=Math.round((average-1)*100);
+				outAvg=Math.trunc(outAvg);
+				 priceComparison=document.createTextNode(outAvg+"% higher");
+			}
+			avgcell.appendChild(priceComparison);
+	}
+}
   handleClick() {
 	var table = document.getElementById("myTable");
 	if (table.rows.length > 0) { //clears out table if not empty
@@ -49,13 +79,13 @@ class OperationLookup extends Component {
 	
 	var operationTotal=0;
 	var numOperations=0;
-	var testing = firebase.database().ref().on('value', function(snap) { //Loops through the hospital names
+	firebase.database().ref().on('value', (snap) =>{ //Loops through the hospital names
 	
-		snap.forEach(function(childNodes) { 
+		snap.forEach((childNodes)=> { 
 		
-			firebase.database().ref().child(childNodes.key).on('value', function(snap2) {
+			firebase.database().ref().child(childNodes.key).on('value', (snap2) => {
 				
-				snap2.forEach(function(child2Nodes) { //loops through the numbers of each hospital
+				snap2.forEach((child2Nodes)=> { //loops through the numbers of each hospital
 				//	console.log("inner");
 						
 						var innerVal =child2Nodes.child("DRG Definition").val();
@@ -81,47 +111,23 @@ class OperationLookup extends Component {
 						}
 						//872 - SEPTICEMIA OR SEVERE SEPSIS W/O MV >96 HOURS W/O MCC
 						//check the name of each child2Nodes.val().name to see if it matches the user input
-						
+
 				});
-				
 			});
-		
+			
+
 			
 		
 			//console.log("outer");
 		});
+		this.OperationAverageFunction(operationTotal,numOperations,table);
 		//console.log(operationTotal);
 		//console.log(numOperations);
 		//console.log(operationTotal/numOperations);
-	});
-		//calculate average price for operations returned
-		//THIS NEEDS TO BE MADE INTO A FUNCTION CALLED AFTER DATABASE RETURNS VALS
-		var operationAverage=operationTotal/numOperations;
-		//regex pattern to make operation prices legibile to parseFloat
-		var pattern = /[^0-9.-]+/g;
-		for(var i=0; i<numOperations;++i){
-			//attempt to iterate through table, add a % difference column, need get operation price from table
-			var temprow=table.rows[i];
-			var avgcell=temprow.insertCell(3);
-			var average=((parseFloat(temprow.cells[2].innerHTML.replace(pattern,''))/operationAverage));
-			var priceComparison;
-			if(average<1){
-				var outAvg=Math.round((1-average)*100);
-				outAvg=Math.trunc(outAvg);
-				 priceComparison=document.createTextNode("% "+outAvg+" lower");
-			}
-			else{
-				var outAvg=Math.round((average-1)*100);
-				outAvg=Math.trunc(outAvg);
-				 priceComparison=document.createTextNode("% "+outAvg+" higher");
-			}
-			avgcell.appendChild(priceComparison);
-		}
-		//END OF FUNCTION
-    
-  
-  }
-  
+		});
+	
+}
+ 
 
 
    render() {
@@ -133,7 +139,7 @@ class OperationLookup extends Component {
 
 			<label for="mysearch">Enter the operation name: </label>
 			<input id="usrOperation" type="search" placeholder="search" />
-			<ButtonTest onClick={this.handleClick}>Click Me</ButtonTest>
+			<ButtonTest onClick={()=>this.handleClick()}>Click Me</ButtonTest>
 			<div align="right">
 			<select id="dropBar" >
 			<option value="name">Order by name</option>
