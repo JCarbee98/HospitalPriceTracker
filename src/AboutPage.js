@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { Helmet } from 'react-helmet';
 // Uses YouTube to embed video. Make sure to have react-youtube installed to run app.
 import YouTube from 'react-youtube';
+import GoogleMapReact from 'google-map-react';
 // Import images to use
 import image from './image.png';
 import image2 from  './image2.png';
@@ -10,6 +11,9 @@ import OperationLookup from "./OperationLookup";
 
 console.log(image);
 console.log(image2);
+
+// React Component for maps implementation
+const HospitalLabel = ({ text }) => <div>{text}</div>;
 
 /*
 The about page details information about:
@@ -73,6 +77,9 @@ class AboutPage extends Component {
 					</div>
 					<Pitch />
 				</div>
+				<div>
+					<SimpleMap />
+				</div>
 			</div>
 
         );
@@ -102,6 +109,35 @@ class Pitch extends React.Component {
 	_onReady(event) {
 		// access to player in all event handlers via event.target
 		event.target.pauseVideo();
+	}
+}
+
+class SimpleMap extends Component {
+	static defaultProps = {
+		center: {
+			lat: 59.95,
+			lng: 30.33
+		},
+		zoom: 11
+	};
+
+	render() {
+		return (
+			// Important! Always set the container height explicitly
+			<div style={{ height: '75vh', width: '75%' }}>
+				<GoogleMapReact
+					bootstrapURLKeys={{ key: "AIzaSyASVyNjLVxumXXANxDppf080uLYn8xTKdQ" }}
+					defaultCenter={this.props.center}
+					defaultZoom={this.props.zoom}
+				>
+					<HospitalLabel
+						lat={30.441813}
+						lng={-84.298495}
+						text="Hospital"
+					/>
+				</GoogleMapReact>
+			</div>
+		);
 	}
 }
 
