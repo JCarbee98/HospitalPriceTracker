@@ -139,13 +139,8 @@ test(){
 
 			<label for="mysearch">Enter the operation name: </label>
 			<input id="usrOperation" type="search" placeholder="search" />
-			<ButtonTest onClick={()=>this.handleClick()}>Click Me</ButtonTest>
-			<div align="right">
-			<select id="dropBar" >
-			<option value="name">Order by name</option>
-			<option value="price">Order by price</option>		
-			</select>
-			</div>
+			<ButtonTest onClick={()=>this.handleClick()}>Submit</ButtonTest>
+			
 			<table id="myTable">
 				
 			</table>
