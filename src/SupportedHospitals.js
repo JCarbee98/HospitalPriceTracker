@@ -24,8 +24,15 @@ class HomePage extends Component {
                 <div>
 					<p1>These are a list of hospitals that our website supports for hopsital lookup and operation lookup. All of the links below should direct you to
 					each hospital's personal website where you can find more information.</p1>
+				</div>	
+					<div>
+						<Map />>
+					</div>
+				
+				<div>
                     <h3>Hospital List:</h3>
-                </div>
+				</div>
+               
                 <div>
                     <h5><a href="https://umiamihealth.org/bascom-palmer-eye-institute">ANNE BATES LEACH EYE HOSPITAL</a></h5>
 <h5><a href="https://aventurahospital.com/?utm_campaign=corp_listings_mgmt&utm_source=google&utm_medium=business_listing&utm_content=EFlorida_1">AVENTURA HOSPITAL AND MEDICAL CENTER</a></h5>
