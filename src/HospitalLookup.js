@@ -46,7 +46,10 @@ class HospitalLookup extends Component {
 		}
 	}
 	
-	
+	function Average(props){
+
+		
+	}
 	const rootCheck = firebase.database().ref();
 	var isReal = (document.getElementById("usrHospital").value).toUpperCase();
 
