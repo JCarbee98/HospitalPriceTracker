@@ -205,10 +205,10 @@ class HomePage extends Component {
 class Map extends Component {
     static defaultProps = {
         center: {
-            lat: 59.95,
-            lng: 30.33
+            lat: 28.205605,
+            lng: -84.298495
         },
-        zoom: 11
+        zoom: 7
     };
 
     render() {
@@ -220,8 +220,8 @@ class Map extends Component {
                     defaultZoom={this.props.zoom}
                 >
                     <HospitalLabel
-                        lat={30.441813}
-                        lng={-84.298495}
+                        lat={30.441}
+                        lng={-83.152138}
                         text="Hospital"
                     />
                 </GoogleMapReact>

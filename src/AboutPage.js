@@ -73,9 +73,6 @@ class AboutPage extends Component {
 					</div>
 					<Pitch />
 				</div>
-				<div>
-					<SimpleMap />
-				</div>
 			</div>
 
         );
