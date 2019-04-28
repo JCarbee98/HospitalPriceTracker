@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
+import GoogleMapReact from 'google-map-react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
+// React Component for maps implementation
+const HospitalLabel = ({ text }) => <div>{text}</div>;
 
 // Style setting to center header
 var divStyle = {
@@ -189,9 +193,40 @@ class HomePage extends Component {
 <h5><a href="https://www.rockledgeregional.org">WUESTHOFF MEDICAL CENTER-ROCKLEDGE</a></h5>
 				
                 </div>
-           
+                <div>
+                    <Map />>
+                </div>
 			</div>
         );
     }
 }
+
+class Map extends Component {
+    static defaultProps = {
+        center: {
+            lat: 59.95,
+            lng: 30.33
+        },
+        zoom: 11
+    };
+
+    render() {
+        return (
+            <div style={{ height: '75vh', width: '75%' }}>
+                <GoogleMapReact
+                    bootstrapURLKeys={{ key: "AIzaSyASVyNjLVxumXXANxDppf080uLYn8xTKdQ" }}
+                    defaultCenter={this.props.center}
+                    defaultZoom={this.props.zoom}
+                >
+                    <HospitalLabel
+                        lat={30.441813}
+                        lng={-84.298495}
+                        text="Hospital"
+                    />
+                </GoogleMapReact>
+            </div>
+        );
+    }
+}
+
 export default HomePage;
