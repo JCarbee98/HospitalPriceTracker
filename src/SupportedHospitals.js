@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import GoogleMapReact from 'google-map-react';
+
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 // React Component for maps implementation
@@ -214,7 +215,7 @@ class Map extends Component {
         return (
             <div style={{ height: '75vh', width: '75%' }}>
                 <GoogleMapReact
-                    bootstrapURLKeys={{ key: "AIzaSyASVyNjLVxumXXANxDppf080uLYn8xTKdQ" }}
+                    bootstrapURLKeys={{ key: "" }}
                     defaultCenter={this.props.center}
                     defaultZoom={this.props.zoom}
                 >
